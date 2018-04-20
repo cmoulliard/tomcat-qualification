@@ -16,7 +16,7 @@ The bash script `qualification.sh` will perform the following steps :
 
 -**NOTE** : To add a new [Spring Boot Samples project](https://github.com/spring-projects/spring-boot/tree/1.5.x/spring-boot-samples) to be tested/qualified, edit the file `projects.json` located under the `files` directory
 
-## To start the bash script
+## Execute the Job testing/qualifying the samples
 
 - Open a terminal and run the bash script
 
