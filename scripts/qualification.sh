@@ -33,50 +33,35 @@ do
   PROJECT_NAME=$(jq -r '.['$c'].name' $JSONFILE)
   ENDPOINT=$(jq -r '.['$c'].endpoint' $JSONFILE)
 
-  echo "==============================="
-  echo "Move to the project to be tested : $PROJECT_NAME"
-  echo "==============================="
   cd $SAMPLE_DIR/$PROJECT_NAME
 
-  echo -e "==============\n TESTING PROJECT : $PROJECT_NAME\n==============\n" >> $REPORT_FILE
+  echo -e "========================================================\n Test executed : $(date) \n========================================================\n" > $REPORT_FILE
+  echo -e "========================================================\n QUALIFYING PROJECT : $PROJECT_NAME\n========================================================\n" >> $REPORT_FILE
 
-  echo "==============================="
-  echo "Compile and test project"
-  echo "==============================="
-
-  echo  -e "======== BEGIN test =====\n" >> $REPORT_FILE
+  echo  -e "======== STEP 1 : BEGIN test =====\n" >> $REPORT_FILE
   mvn clean test >> $REPORT_FILE
-  echo  -e "======== END test =====\n" >> $REPORT_FILE
+  echo  -e "======== STEP 1 : END test =====\n" >> $REPORT_FILE
 
-  echo -e "======== START Spring Boot =====\n" >> $REPORT_FILE
+  echo -e "======== STEP 2 : Start Spring Boot =====\n" >> $REPORT_FILE
   nohup mvn spring-boot:run -Dserver.port=8989 &
-
-  echo -e "======== Get Spring Boot PID =====\n"
+  sleep 30
   SPRING_PID=$(lsof -i:8989 -t)
-  echo "Spring Boot PID is : $SPRING_PID"
 
-  echo -e "==============================="  >> $REPORT_FILE
-  echo -e "Call endpoint : $ENDPOINT"        >> $REPORT_FILE
-  echo -e "==============================="  >> $REPORT_FILE
+  echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
   while [ $(curl --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != 200 ]
    do
-     echo "Wait till we get http response 200 .... from $ENDPOINT"
+     echo "Wait till we get http response 200 .... from $ENDPOINT" >> $REPORT_FILE
      sleep 30
   done
+  echo "SUCCESSFULLY TESTED : Endpoint $service replied : $(curl -s $ENDPOINT)\n" >> $REPORT_FILE
 
-  echo -e "==============================="  >> $REPORT_FILE
-  echo "SUCCESSFULLY TESTED : Endpoint $service replied : $(curl -s $ENDPOINT)" >> $REPORT_FILE
-  echo -e "==============================="  >> $REPORT_FILE
+  kill $SPRING_PID
+  echo -e "============ STEP 2 : Spring Boot Stopped ===================\n"  >> $REPORT_FILE
+  echo -e "========================================================\n END QUALIFYING PROJECT : $PROJECT_NAME\n========================================================\n" >> $REPORT_FILE
 
-  echo -e "======== Kill Spring Boot PID =====\n"
-  kill -TERM $SPRING_PID || kill -KILL $SPRING_PID
-
-  echo "==============================="
-  echo "Move up"
-  echo "==============================="
   cd ..
 done
 
-#rm -rf $TMP_DIR
+rm -rf $TMP_DIR
 
 cd $CURRENT
