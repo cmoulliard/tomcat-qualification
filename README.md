@@ -22,7 +22,8 @@ The bash script `qualification.sh` will perform the following steps :
 |------|-------------|----------|
 | spring-boot-sample-tomcat | Spring Boot Application with REST @Controller and @Component Service | HTTP Connector and REST |
 | spring-boot-sample-tomcat80-ssl | Spring Boot TLS/SSL Application with REST @Controller and @Component Service | SSL/TLS |
-| pring-boot-sample-tomcat-jsp | Spring Boot : JSP & JSTL web Application | JSP/JSTL | 
+| spring-boot-sample-tomcat-jsp | Spring Boot JSP & JSTL web Application | JSP/JSTL | 
+| spring-boot-sample-tomcat | Spring Boot Websocket Application | Websocket | 
 
 ## Execute the Job testing/qualifying the samples
 

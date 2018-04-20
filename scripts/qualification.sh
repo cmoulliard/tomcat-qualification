@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+#
+# Pre-req
+# jq, python2, python websocket-client are installed
+#
+
 CURRENT=$(pwd)
 SAMPLE_REPO="https://github.com/spring-projects/spring-boot.git"
 SAMPLE_PROJECT_NAME="spring-boot"
@@ -61,22 +66,40 @@ do
   sleep 30
   SPRING_PID=$(lsof -i:$CONTAINER_PORT -t)
 
-  if [[ $ENDPOINT = *"https"* ]]; then CURL_PARAMS="-k"; fi
+  # Check if project is a websocket sample
+  if [[ $PROJECT_NAME =~ "websocket" ]] ; then
+     echo "# THIS IS A WEBSOCKET Project"
 
-  echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
-  while [ $(curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != 200 ]
-   do
-     echo "Wait till we get http response 200 .... from $ENDPOINT" >> $REPORT_FILE
-     sleep 30
-  done
-  CURL_RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)
-
-  if [[ $CURL_RESULT = *$RESPONSE* ]]; then
-    STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $CURL_RESULT\n"
+     # Call the Websocket and Capture the response
+     WS_RESPONSE=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
+     if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
+       STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
+     else
+       STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $WS_RESPONSE but we were expecting : $RESPONSE \n"
+     fi
   else
-    STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $CURL_RESULT but we were expecting : $RESPONSE \n"
+     echo "# THIS IS A HTTP/HTTPS Project"
+
+     # Add parameter for curl if protocol is https
+     if [[ $ENDPOINT = *"https"* ]]; then CURL_PARAMS="-k"; fi
+
+     # Call the http endpoint ans wait till we get a reponse
+     echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
+     while [ $(curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != 200 ]
+      do
+        echo "Wait till we get http response 200 .... from $ENDPOINT" >> $REPORT_FILE
+        sleep 30
+     done
+     CURL_RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)
+
+     if [[ $CURL_RESULT = *$RESPONSE* ]]; then
+       STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $CURL_RESULT\n"
+     else
+       STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $CURL_RESULT but we were expecting : $RESPONSE \n"
+     fi
   fi
 
+  # Kill Spring Boot Application process
   kill $SPRING_PID
   echo -e "======== STEP 2 : Spring Boot Stopped ===================\n"  >> $REPORT_FILE
 

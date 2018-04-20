@@ -1,5 +1,12 @@
 [
   {
+    "name": "spring-boot-sample-websocket-tomcat",
+    "title": "Spring Boot : Websocket Application",
+    "endpoint": "ws://localhost:8989/echo/websocket",
+    "port": "8989",
+    "response": "Received 'Did you say \"Hello, World\"?'"
+  },
+  {
     "name": "spring-boot-sample-tomcat",
     "title": "Spring Boot : Application with REST @Controller and @Component Service",
     "endpoint": "http://localhost:8989/",
