@@ -43,7 +43,8 @@ do
 
   echo -e "========================================================\n $COUNTER - QUALIFYING PROJECT : $PROJECT_NAME\n========================================================\n"
   echo -e "========================================================\n $COUNTER - QUALIFYING PROJECT : $PROJECT_NAME\n========================================================\n" >> $REPORT_FILE
-  echo  -e "======== STEP 1 : BEGIN test =====\n" >> $REPORT_FILE
+  echo -e "======== STEP 1 : BEGIN test =====\n" >> $REPORT_FILE
+  # mvn dependency:tree | grep tomcat
   MVN_TEST_RESULT=$(mvn clean test)
   TEST_STATUS=$(echo "$MVN_TEST_RESULT" | grep '\[INFO\] BUILD SUCCESS')
 
@@ -70,7 +71,7 @@ do
   done
   CURL_RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)
 
-  if [[ $CURL_RESULT = $RESPONSE ]]; then
+  if [[ $CURL_RESULT = *$RESPONSE* ]]; then
     STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $CURL_RESULT\n"
   else
     STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $CURL_RESULT but we were expecting : $RESPONSE \n"

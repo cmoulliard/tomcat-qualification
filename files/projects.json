@@ -12,5 +12,12 @@
     "endpoint": "https://localhost:8443/",
     "port": "8443",
     "response": "Hello, world"
+  },
+  {
+    "name": "spring-boot-sample-tomcat-jsp",
+    "title": "Spring Boot : JSP & JSTL web Application",
+    "endpoint": "http://localhost:8989/",
+    "port": "8989",
+    "response": "Message: Hello Phil"
   }
 ]
