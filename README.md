@@ -16,7 +16,7 @@ The bash script `qualification.sh` will perform the following steps :
 
 -**NOTE** : To add a new [Spring Boot Samples project](https://github.com/spring-projects/spring-boot/tree/1.5.x/spring-boot-samples) to be tested/qualified, edit the file `projects.json` located under the `files` directory
 
-## Run the bash script to test the Spring Boot Samples Git hub project using the Tomcat 8.0 dependencies
+## To start the bash script
 
 - Open a terminal and run the bash script
 
@@ -24,7 +24,7 @@ The bash script `qualification.sh` will perform the following steps :
 ./scripts/qualification.sh
 ```
 
-- Consult the report generated within the current folder and specifically the section
+- Consult the report generated within the current folder and specifically these section
 
 ```bash
 ========================================================
@@ -78,5 +78,5 @@ Step 2: Endpoint query result : Success : Endpoint https://localhost:8443/ repli
 ========================================================
  2 - END QUALIFYING PROJECT : spring-boot-sample-tomcat80-ssl
 ========================================================
-
+...
 ```
