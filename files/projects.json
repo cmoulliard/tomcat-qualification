@@ -1,0 +1,7 @@
+[
+  {
+    "name": "spring-boot-sample-tomcat",
+    "endpoint": "http://localhost:8989/",
+    "response": "Hello World"
+  }
+]
