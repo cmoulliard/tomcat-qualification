@@ -2,17 +2,17 @@
 
 ## Goals of the project
 
-The goal of this project is to test a collection of Sprong Boot applications, part of the Spring Boot upstream project and
+The goal of this project is to test a collection of Spring Boot applications, part of the Spring Boot upstream project and
 to test them using the Apache Tomcat `8.0.36` embedded container
 
 The bash script `qualification.sh` will perform the following steps :
 
 - Download the branch `v1.5.12.RELEASE` of the Spring Boot project
-- Replace the `pom.xml` file of the `spring-boot-samples` folder with our
+- Replace the `pom.xml` file of the `spring-boot-samples` folder with our which contains the `Apache Tomcat 8.0.x` dependencies
 - For each entry, project defined within the json file `projects.json`, execute these instructions :
-  - Run `mvn clean test` and store the result within `step1_result` to check if the status is `success` or `failure`
-  - start in background a `spring-boot` application, call a `endpoint` or web page to get a response. Keep the result saved under `step1_result` to validate the response
-- Save result of step1, step2 within the `result_`date +%F`.txt` file  
+  - Run `mvn clean test` and store the result within `step1_result` to check if the status of the maven test is `successfull` or `failure`
+  - Start in background a `spring-boot` application, call the `endpoint` of the project or web page to get a response. Keep the result saved under `step1_result` to validate the response
+- Save the result of step1, step2 within the report `result_DATE.txt` file  
 
 -**NOTE** : To add a new [Spring Boot Samples project](https://github.com/spring-projects/spring-boot/tree/1.5.x/spring-boot-samples) to be tested/qualified, edit the file `projects.json` located under the `files` directory
 
