@@ -53,7 +53,8 @@ do
      echo "Wait till we get http response 200 .... from $ENDPOINT" >> $REPORT_FILE
      sleep 30
   done
-  echo "SUCCESSFULLY TESTED : Endpoint $service replied : $(curl -s $ENDPOINT)\n" >> $REPORT_FILE
+  echo -e "Endpoint $service replied : $(curl -s $ENDPOINT)\n" >> $REPORT_FILE
+  echo -e "$PROJECT_NAME Test - Result\n" >> $REPORT_FILE
 
   kill $SPRING_PID
   echo -e "============ STEP 2 : Spring Boot Stopped ===================\n"  >> $REPORT_FILE
