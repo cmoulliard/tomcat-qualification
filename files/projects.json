@@ -1,7 +1,16 @@
 [
   {
     "name": "spring-boot-sample-tomcat",
+    "title": "Spring Boot : Application with REST @Controller and @Component Service",
     "endpoint": "http://localhost:8989/",
+    "port": "8989",
     "response": "Hello World"
+  },
+  {
+    "name": "spring-boot-sample-tomcat80-ssl",
+    "title": "Spring Boot : TLS/SSL Application with REST @Controller and @Component Service",
+    "endpoint": "https://localhost:8443/",
+    "port": "8443",
+    "response": "Hello, world"
   }
 ]

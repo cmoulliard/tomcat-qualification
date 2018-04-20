@@ -6,7 +6,7 @@
 ./scripts/qualification.sh
 ```
 
-- Consult the report generated within the current folder
+- Consult the report generated within the current folder and specifically the section
 
 ```bash
 cat result_2018-04-20.txt
@@ -16,7 +16,8 @@ cat result_2018-04-20.txt
 ========================================================
 
 ========================================================
- QUALIFYING PROJECT : spring-boot-sample-tomcat
+ 1. QUALIFYING PROJECT : spring-boot-sample-tomcat
 ========================================================
+
 ...
 ```
