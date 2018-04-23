@@ -1,5 +1,11 @@
 # Instructions
 
+## Prerequisites
+
+- Command line JSON processor - [jq](https://stedolan.github.io/jq/),
+- [Python2](https://www.python.org/downloads/) interpreter is installed 
+- Python [websocket-client](https://pypi.org/project/websocket-client/)
+
 ## Goals of the project
 
 The goal of this project is to test a collection of Spring Boot applications, part of the Spring Boot upstream project and
