@@ -1,4 +1,10 @@
 [
+  { "name": "spring-boot-sample-war",
+    "title":"Spring Boot war packaging and custom properties",
+    "endpoint": "http://localhost:8989/",
+    "port": "8989",
+    "response": "<h1>Home</h1>"
+  },
   { "name": "spring-boot-sample-traditional",
     "title":"Spring Boot traditional MVC & JSP application (WEB-INF,web.xml,jsp)",
     "endpoint": "http://localhost:8989/",
