@@ -1,4 +1,10 @@
 [
+  { "name": "spring-boot-sample-webservices",
+    "title":"Spring Boot Webservice application",
+    "endpoint": "http://localhost:8989/services",
+    "port": "8989",
+    "response": ""
+  },
   { "name": "spring-boot-sample-war",
     "title":"Spring Boot war packaging and custom properties",
     "endpoint": "http://localhost:8989/",

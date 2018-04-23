@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:hr="http://mycompany.com/hr/schemas">
+    <soapenv:Body>
+    <hr:HolidayRequest>
+        <hr:Holiday>
+            <hr:StartDate>2013-10-20</hr:StartDate>
+            <hr:EndDate>2013-11-22</hr:EndDate>
+        </hr:Holiday>
+        <hr:Employee>
+            <hr:Number>1</hr:Number>
+            <hr:FirstName>John</hr:FirstName>
+            <hr:LastName>Doe</hr:LastName>
+        </hr:Employee>
+    </hr:HolidayRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
