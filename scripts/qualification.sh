@@ -84,7 +84,7 @@ do
      if [[ $ENDPOINT = *"https"* ]]; then CURL_PARAMS="-k"; fi
 
      # Add soap.xml file to curl if project contains webservices word
-     if [[ $PROJECT_NAME = *"webservices"* ]]; then CURL_PARAMS="-H "content-type: text/xml" -d @$CURRENT/files/soap.xml"; fi
+     if [[ $PROJECT_NAME = *"webservices"* ]]; then CURL_PARAMS="-H \"content-type: text/xml\" -d @$CURRENT/files/soap.xml"; fi
 
      # Call the http endpoint ans wait till we get a reponse
      echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE

@@ -35,7 +35,7 @@ The bash script `qualification.sh` will perform the following steps :
 | spring-boot-sample-webservices** | Spring Boot Webservice application | Webservice | 
 
 *: It can't be tested as the sample project uses a random port to start the Web NIO Connector. Then, the project must be tested manually
-*: It can't be tested as the sample project don't return a response to a curl req. Then, the project must be tested manually
+*: It can't be fully tested as the sample project don't return a response to a curl req. Then, the project must be tested manually
 
 ## Execute the Job testing/qualifying the samples
 
