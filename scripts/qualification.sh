@@ -17,7 +17,7 @@ REPORT_FILE="$CURRENT/result_`date +%F`.txt"
 # Read the qualification json file which contains the name of the project to be qualified and the endpoint to check (E.g /greeting)
 #
 START=0
-JSONFILE=$CURRENT/files/projects.json
+JSONFILE=${1:-$CURRENT/files/projects.json}
 END=$(cat $JSONFILE | jq '.|length')
 
 #
@@ -98,7 +98,7 @@ do
 
      # Call the http endpoint ans wait till we get a response
      echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
-     if [ "$DEBUG" ]; then echo "curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT)"; fi
+     if [ "$DEBUG" ]; then echo "curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT"; fi
 
      while [ $(curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != 200 ]
       do
