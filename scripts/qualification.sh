@@ -104,7 +104,7 @@ do
      echo "# THIS IS A Webservice Project"
 
      # Call the call_websocket.py and Capture the response
-     WS_RESPONSE=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
+     WS_RESPONSE=$(python $CURRENT/scripts/call_WS.py $ENDPOINT $CURRENT/files/soap.xml)
      generateStatusResult $WS_RESPONSE $RESPONSE $ENDPOINT
      #if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
      #  STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
