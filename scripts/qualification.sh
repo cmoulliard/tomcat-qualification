@@ -43,6 +43,7 @@ do
   ENDPOINT=$(jq -r '.['$c'].endpoint' $JSONFILE)
   RESPONSE=$(jq -r '.['$c'].response' $JSONFILE)
   CONTAINER_PORT=$(jq -r '.['$c'].port' $JSONFILE)
+  STATUS=$(jq -r '.['$c'].status' $JSONFILE)
 
   cd $PROJECT_NAME
 

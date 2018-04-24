@@ -3,24 +3,28 @@
     "title":"Secure Spring Boot application using login page with Cross-Site Request Forgery",
     "endpoint": "http://localhost:8989/login",
     "port": "8989",
+    "status": "200",
     "response": "<div>Hello World</div>"
   },
   { "name": "spring-boot-sample-webservices",
     "title":"Spring Boot Webservice application",
     "endpoint": "http://localhost:8989/services",
     "port": "8989",
+    "status": "202",
     "response": ""
   },
   { "name": "spring-boot-sample-war",
     "title":"Spring Boot war packaging and custom properties",
     "endpoint": "http://localhost:8989/",
     "port": "8989",
+    "status": "200",
     "response": "<h1>Home</h1>"
   },
   { "name": "spring-boot-sample-traditional",
     "title":"Spring Boot traditional MVC & JSP application (WEB-INF,web.xml,jsp)",
     "endpoint": "http://localhost:8989/",
     "port": "8989",
+    "status": "200",
     "response": "<h1>Home</h1>"
   },
   {
@@ -28,6 +32,7 @@
     "title": "Spring Boot : Websocket Application",
     "endpoint": "ws://localhost:8989/echo/websocket",
     "port": "8989",
+    "status": "200",
     "response": "Received 'Did you say \"Hello, World\"?'"
   },
   {
@@ -35,6 +40,7 @@
     "title": "Spring Boot : Application with REST @Controller and @Component Service",
     "endpoint": "http://localhost:8989/",
     "port": "8989",
+    "status": "200",
     "response": "Hello World"
   },
   {
@@ -42,6 +48,7 @@
     "title": "Spring Boot : TLS/SSL Application with REST @Controller and @Component Service",
     "endpoint": "https://localhost:8443/",
     "port": "8443",
+    "status": "200",
     "response": "Hello, world"
   },
   {
@@ -49,6 +56,7 @@
     "title": "Spring Boot : JSP & JSTL web Application",
     "endpoint": "http://localhost:8989/",
     "port": "8989",
+    "status": "200",
     "response": "Message: Hello Phil"
   }
 ]
