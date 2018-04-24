@@ -1,5 +1,6 @@
 from xml.etree import ElementTree
 import requests
+import sys
 
 url = sys.argv[1]
 user = sys.argv[2]
