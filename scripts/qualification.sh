@@ -97,7 +97,7 @@ do
     *"secure"*)
        echo "# THIS IS A SECURED PROJECT"
        # Call the auth_csrf.py script and Capture the response
-       RESULT=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT $USERNAME $PASSWORD)
+       RESULT=$(python $CURRENT/scripts/call_auth_csrf.py $ENDPOINT $USERNAME $PASSWORD)
        generateStatusResult $RESULT $RESPONSE $ENDPOINT
        ;;
     *"webservices"*)
