@@ -103,7 +103,7 @@ do
 
      while [ $(curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != $STATUS ]
       do
-        echo "Wait till we get http response 200 .... from $ENDPOINT" >> $REPORT_FILE
+        echo "Wait till we get http response $STATUS .... from $ENDPOINT" >> $REPORT_FILE
         sleep 30
      done
      CURL_RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)

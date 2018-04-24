@@ -20,7 +20,11 @@
 		<main.basedir>${basedir}/..</main.basedir>
 		<java.version>1.8</java.version>
 		<tomcat.version>8.0.36</tomcat.version>
-		<!--<tomcat.version>8.0.36.redhat-30</tomcat.version>-->
+		<tomcat-juli.version>8.0.36</tomcat-juli.version>
+		<!--
+		<tomcat.version>8.0.36.redhat-30</tomcat.version>
+		<tomcat-juli>8.5.20.redhat-5</tomcat-juli>
+		-->
 	</properties>
 	<modules>
 		<module>spring-boot-sample-ant</module>
@@ -146,7 +150,7 @@
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-juli</artifactId>
-			<version>${tomcat.version}</version>
+			<version>${tomcat-juli.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
