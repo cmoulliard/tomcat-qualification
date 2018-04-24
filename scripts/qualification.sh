@@ -74,7 +74,7 @@ do
   case $PROJECT_NAME in
     *"war"*)
       mvn clean package
-      nohup java -jar target/*.war -Dserver.port=$CONTAINER_PORT &
+      nohup java -jar target/*.war &
       sleep 30
       SPRING_PID=$(lsof -i:$CONTAINER_PORT -t)
       ;;
