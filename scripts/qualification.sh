@@ -6,10 +6,10 @@
 #
 
 function generateStatusResult() {
-  if [[ $2 = *$3* ]]; then
-    STEP2_RESULT="Endpoint query result : Success : Endpoint $4 replied : $2\n"
+  if [[ $1 = *$2* ]]; then
+    STEP2_RESULT="Endpoint query result : Success : Endpoint $3 replied : $1\n"
   else
-    STEP2_RESULT="Endpoint query result : Failing : Endpoint $4 replied : $2 but we were expecting : $3 \n"
+    STEP2_RESULT="Endpoint query result : Failing : Endpoint $3 replied : $1 but we were expecting : $2\n"
   fi
 }
 
