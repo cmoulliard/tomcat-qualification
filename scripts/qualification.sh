@@ -101,7 +101,7 @@ do
      echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
      if [ "$DEBUG_SCRIPT" ]; then echo "curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT"; fi
 
-     while [ $(curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != 200 ]
+     while [ $(curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != $STATUS ]
       do
         echo "Wait till we get http response 200 .... from $ENDPOINT" >> $REPORT_FILE
         sleep 30
