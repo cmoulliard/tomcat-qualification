@@ -52,8 +52,8 @@ do
   RESPONSE=$(jq -r '.['$c'].response' $JSONFILE)
   CONTAINER_PORT=$(jq -r '.['$c'].port' $JSONFILE)
   STATUS=$(jq -r '.['$c'].status' $JSONFILE)
-  USERNAME=$(jq -r '.['$c'].username' $JSONFILE)
-  PASSWORD=$(jq -r '.['$c'].password' $JSONFILE)
+  USERNAME=$(jq -r '.['$c'].user' $JSONFILE)
+  PASSWORD=$(jq -r '.['$c'].pwd' $JSONFILE)
 
   cd $PROJECT_NAME
 
@@ -97,6 +97,7 @@ do
     *"secure"*)
        echo "# THIS IS A SECURED PROJECT"
        # Call the auth_csrf.py script and Capture the response
+       echo "python $CURRENT/scripts/call_auth_csrf.py $ENDPOINT $USERNAME $PASSWORD"
        RESULT=$(python $CURRENT/scripts/call_auth_csrf.py $ENDPOINT $USERNAME $PASSWORD)
        generateStatusResult $RESULT $RESPONSE $ENDPOINT
        ;;

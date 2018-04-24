@@ -3,8 +3,8 @@
     "title":"Secure Spring Boot application using login page with Cross-Site Request Forgery",
     "endpoint": "http://localhost:8989/login",
     "port": "8989",
-    "username": "user",
-    "password": "user",
+    "user": "user",
+    "pwd": "user",
     "status": "200",
     "response": "<div>Hello World</div>"
   },
@@ -12,8 +12,8 @@
     "title":"Secure Spring Boot application using login page with CSRF, Role defined on method level. Admin user",
     "endpoint": "http://localhost:8989/login",
     "port": "8989",
-    "username": "admin",
-    "password": "admin",
+    "user": "admin",
+    "pwd": "admin",
     "status": "200",
     "response": "<div>Hello World</div>"
   },
@@ -21,8 +21,8 @@
     "title":"Secure Spring Boot application using login page with CSRF, Role defined on method level. NON Admin user",
     "endpoint": "http://localhost:8989/login",
     "port": "8989",
-    "username": "user",
-    "password": "user",
+    "user": "user",
+    "pwd": "user",
     "status": "200",
     "response": "you do not have permission for that resource"
   },
