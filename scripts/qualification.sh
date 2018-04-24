@@ -71,10 +71,19 @@ do
   echo  -e "======== STEP 1 : END test =====\n" >> $REPORT_FILE
 
   echo -e "======== STEP 2 : Start Spring Boot =====\n" >> $REPORT_FILE
-  nohup mvn spring-boot:run -Dserver.port=$CONTAINER_PORT &
-  sleep 30
-  SPRING_PID=$(lsof -i:$CONTAINER_PORT -t)
-
+  case $PROJECT_NAME in
+    *"war"*)
+      mvn clean package
+      nohup java -jar target/*.war -Dserver.port=$CONTAINER_PORT &
+      sleep 30
+      SPRING_PID=$(lsof -i:$CONTAINER_PORT -t)
+      ;;
+    *)
+      nohup mvn spring-boot:run -Dserver.port=$CONTAINER_PORT &
+      sleep 30
+      SPRING_PID=$(lsof -i:$CONTAINER_PORT -t)
+      ;;
+  esac
 
   case $PROJECT_NAME in
     *"websocket"*)
