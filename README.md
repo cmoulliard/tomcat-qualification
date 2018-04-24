@@ -31,12 +31,12 @@ The bash script `qualification.sh` will perform the following steps :
 | spring-boot-sample-tomcat-jsp | Spring Boot JSP & JSTL web Application | JSP/JSTL | 
 | spring-boot-sample-websocket-tomcat | Spring Boot Websocket Application | Websocket | 
 | spring-boot-sample-traditional | Spring Boot traditional MVC & JSP application (WEB-INF,web.xml,jsp) | JSP, war packaging | 
+| spring-boot-sample-war | Spring Boot war packaging and custom properties | War packaging | 
 | spring-boot-sample-multiconnectors* | Spring Boot application with 2 connectors (Http11NioProtocol, TLS) | MultiConnectors (TLS, NIO) |
-| spring-boot-sample-webservices** | Spring Boot Webservice application | Webservice | 
+| spring-boot-sample-webservices | Spring Boot Webservice application | Webservice | 
 | spring-boot-sample-web-secure | Spring Boot Web application secured using login page & Cross-Site Request Forgery  | Security, Authentication, CSRF | 
 
 *: It can't be tested as the sample project uses a random port to start the Web NIO Connector. Then, the project must be tested manually
-*: It can't be fully tested as the sample project don't return a response to a curl req. Then, the project must be tested manually
 
 ## Execute the Job testing/qualifying the samples
 
