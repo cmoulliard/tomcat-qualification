@@ -5,6 +5,14 @@
 # jq, python2, python websocket-client, xml are installed
 #
 
+function generateStatusResult() {
+  if [[ $1 = *$2* ]]; then
+    STEP2_RESULT="Endpoint query result : Success : Endpoint $3 replied : $1\n"
+  else
+    STEP2_RESULT="Endpoint query result : Failing : Endpoint $3 replied : $1 but we were expecting : $2 \n"
+  fi
+}
+
 CURRENT=$(pwd)
 SAMPLE_REPO="https://github.com/spring-projects/spring-boot.git"
 SAMPLE_PROJECT_NAME="spring-boot"
@@ -73,21 +81,36 @@ do
 
      # Call the Websocket and Capture the response
      WS_RESPONSE=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
-     if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
-       STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
-     else
-       STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $WS_RESPONSE but we were expecting : $RESPONSE \n"
-     fi
+     generateStatusResult $WS_RESPONSE $RESPONSE $ENDPOINT
+     # if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
+     #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
+     # else
+     #   STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $WS_RESPONSE but we were expecting : $RESPONSE \n"
+     # fi
+
   elif [[ $PROJECT_NAME =~ "secure" ]] ; then
      echo "# THIS IS A Secure Project"
 
      # Call the auth_csrf.py script and Capture the response
      AUTH_RESPONSE=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT user user)
-     if [[ $AUTH_RESPONSE = *$RESPONSE* ]]; then
-       STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $AUTH_RESPONSE\n"
-     else
-       STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $AUTH_RESPONSE but we were expecting : $RESPONSE \n"
-     fi
+     generateStatusResult $AUTH_RESPONSE $RESPONSE $ENDPOINT
+     # if [[ $AUTH_RESPONSE = *$RESPONSE* ]]; then
+     #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $AUTH_RESPONSE\n"
+     # else
+     #   STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $AUTH_RESPONSE but we were expecting : $RESPONSE \n"
+     # fi
+
+  elif [[ $PROJECT_NAME =~ "webservices" ]] ; then
+     echo "# THIS IS A Webservice Project"
+
+     # Call the call_websocket.py and Capture the response
+     WS_RESPONSE=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
+     generateStatusResult $WS_RESPONSE $RESPONSE $ENDPOINT
+     #if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
+     #  STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
+     #else
+     #  STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $WS_RESPONSE but we were expecting : $RESPONSE \n"
+     #fi
   else
      echo "# THIS IS A HTTP/HTTPS Project"
 
@@ -95,7 +118,7 @@ do
      if [[ $ENDPOINT = *"https"* ]]; then CURL_PARAMS="-k"; fi
 
      # Add soap.xml file to curl if project contains webservices word
-     if [[ $PROJECT_NAME = *"webservices"* ]]; then CURL_PARAMS='-H "content-type: text/xml"'"-d @$CURRENT/files/soap.xml"; fi
+     if [[ $PROJECT_NAME = *"webservices"* ]]; then CURL_PARAMS='-H "content-type: text/xml"'" -d @$CURRENT/files/soap.xml"; fi
 
      # Call the http endpoint ans wait till we get a response
      echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
@@ -107,12 +130,12 @@ do
         sleep 30
      done
      CURL_RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)
-
-     if [[ $CURL_RESULT = *$RESPONSE* ]]; then
-       STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $CURL_RESULT\n"
-     else
-       STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $CURL_RESULT but we were expecting : $RESPONSE \n"
-     fi
+     generateStatusResult $CURL_RESULT $RESPONSE $ENDPOINT
+     # if [[ $CURL_RESULT = *$RESPONSE* ]]; then
+     #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $CURL_RESULT\n"
+     # else
+     #   STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $CURL_RESULT but we were expecting : $RESPONSE \n"
+     # fi
   fi
 
   # Kill Spring Boot Application process
