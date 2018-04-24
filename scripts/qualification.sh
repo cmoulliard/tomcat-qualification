@@ -2,7 +2,7 @@
 
 #
 # Pre-req
-# jq, python2, python websocket-client are installed
+# jq, python2, python websocket-client, xml are installed
 #
 
 CURRENT=$(pwd)
@@ -98,7 +98,8 @@ do
 
      # Call the http endpoint ans wait till we get a response
      echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
-     if [[ -z = "$DEBUG" ]]; then echo "curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT)"; fi
+     if [ -z = "$DEBUG" ]; then echo "curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT)"; fi
+
      while [ $(curl $CURL_PARAMS --write-out %{http_code} --silent --output /dev/null $ENDPOINT) != 200 ]
       do
         echo "Wait till we get http response 200 .... from $ENDPOINT" >> $REPORT_FILE
