@@ -82,7 +82,7 @@ do
 
      # Call the auth_csrf.py script and Capture the response
      AUTH_RESPONSE=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT user user)
-     if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
+     if [[ $AUTH_RESPONSE = *$RESPONSE* ]]; then
        STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $AUTH_RESPONSE\n"
      else
        STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $AUTH_RESPONSE but we were expecting : $RESPONSE \n"
