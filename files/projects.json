@@ -1,4 +1,10 @@
 [
+  { "name": "spring-boot-sample-secure",
+    "title":"Secure Spring Boot application using login page with Cross-Site Request Forgery",
+    "endpoint": "http://localhost:8989/login",
+    "port": "8989",
+    "response": "<div>Hello World</div>"
+  },
   { "name": "spring-boot-sample-webservices",
     "title":"Spring Boot Webservice application",
     "endpoint": "http://localhost:8989/services",
