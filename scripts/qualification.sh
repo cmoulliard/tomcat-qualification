@@ -75,50 +75,31 @@ do
   sleep 30
   SPRING_PID=$(lsof -i:$CONTAINER_PORT -t)
 
-  # Check if project is a websocket sample
-  if [[ $PROJECT_NAME =~ "websocket" ]] ; then
-     echo "# THIS IS A WEBSOCKET Project"
 
-     # Call the Websocket and Capture the response
-     RESULT=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
-     generateStatusResult $RESULT $RESPONSE $ENDPOINT
-     # if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
-     #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
-     # else
-     #   STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $WS_RESPONSE but we were expecting : $RESPONSE \n"
-     # fi
-
-  elif [[ $PROJECT_NAME =~ "secure" ]] ; then
-     echo "# THIS IS A Secure Project"
-
-     # Call the auth_csrf.py script and Capture the response
-     RESULT=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT user user)
-     generateStatusResult $RESULT $RESPONSE $ENDPOINT
-     # if [[ $AUTH_RESPONSE = *$RESPONSE* ]]; then
-     #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $AUTH_RESPONSE\n"
-     # else
-     #   STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $AUTH_RESPONSE but we were expecting : $RESPONSE \n"
-     # fi
-
-  elif [[ $PROJECT_NAME =~ "webservices" ]] ; then
-     echo "# THIS IS A Webservice Project"
-
-     # Call the call_websocket.py and Capture the response
-     RESULT=$(python $CURRENT/scripts/call_WS.py $ENDPOINT $CURRENT/files/soap.xml)
-     generateStatusResult $RESULT $RESPONSE $ENDPOINT
-     #if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
-     #  STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
-     #else
-     #  STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $WS_RESPONSE but we were expecting : $RESPONSE \n"
-     #fi
-  else
-     echo "# THIS IS A HTTP/HTTPS Project"
+  case $PROJECT_NAME in
+    *"websocket"*)
+       echo "# THIS IS A WEBSOCKET PROJECT"
+       # Call the Websocket and Capture the response
+       RESULT=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
+       generateStatusResult $RESULT $RESPONSE $ENDPOINT
+       ;;
+    *"secure"*)
+       echo "# THIS IS A Secure Project"
+       # Call the auth_csrf.py script and Capture the response
+       RESULT=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT user user)
+       generateStatusResult $RESULT $RESPONSE $ENDPOINT
+       ;;
+    *"webservices"*)
+       echo "# THIS IS A Webservice Project"
+       # Call the call_websocket.py and Capture the response
+       RESULT=$(python $CURRENT/scripts/call_WS.py $ENDPOINT $CURRENT/files/soap.xml)
+       generateStatusResult $RESULT $RESPONSE $ENDPOINT
+       ;;
+    *)
+     echo "# THIS IS A HTTP/HTTPS PROJECT"
 
      # Add parameter for curl if protocol is https
      if [[ $ENDPOINT = *"https"* ]]; then CURL_PARAMS="-k"; fi
-
-     # Add soap.xml file to curl if project contains webservices word
-     if [[ $PROJECT_NAME = *"webservices"* ]]; then CURL_PARAMS='-H "content-type: text/xml"'" -d @$CURRENT/files/soap.xml"; fi
 
      # Call the http endpoint ans wait till we get a response
      echo -e "Call endpoint : $ENDPOINT" >> $REPORT_FILE
@@ -131,12 +112,8 @@ do
      done
      RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)
      generateStatusResult $RESULT $RESPONSE $ENDPOINT
-     # if [[ $CURL_RESULT = *$RESPONSE* ]]; then
-     #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $CURL_RESULT\n"
-     # else
-     #   STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $CURL_RESULT but we were expecting : $RESPONSE \n"
-     # fi
-  fi
+     ;;
+  esac
 
   # Kill Spring Boot Application process
   kill $SPRING_PID
