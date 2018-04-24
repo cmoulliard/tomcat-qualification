@@ -52,6 +52,8 @@ do
   RESPONSE=$(jq -r '.['$c'].response' $JSONFILE)
   CONTAINER_PORT=$(jq -r '.['$c'].port' $JSONFILE)
   STATUS=$(jq -r '.['$c'].status' $JSONFILE)
+  USERNAME=$(jq -r '.['$c'].username' $JSONFILE)
+  PASSWORD=$(jq -r '.['$c'].password' $JSONFILE)
 
   cd $PROJECT_NAME
 
@@ -93,13 +95,13 @@ do
        generateStatusResult $RESULT $RESPONSE $ENDPOINT
        ;;
     *"secure"*)
-       echo "# THIS IS A Secure Project"
+       echo "# THIS IS A SECURED PROJECT"
        # Call the auth_csrf.py script and Capture the response
-       RESULT=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT user user)
+       RESULT=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT $USERNAME $PASSWORD)
        generateStatusResult $RESULT $RESPONSE $ENDPOINT
        ;;
     *"webservices"*)
-       echo "# THIS IS A Webservice Project"
+       echo "# THIS IS A WEBSERVICE PROJECT"
        # Call the call_websocket.py and Capture the response
        RESULT=$(python $CURRENT/scripts/call_WS.py $ENDPOINT $CURRENT/files/soap.xml)
        generateStatusResult $RESULT $RESPONSE $ENDPOINT

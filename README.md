@@ -34,7 +34,8 @@ The bash script `qualification.sh` will perform the following steps :
 | spring-boot-sample-war | Spring Boot war packaging and custom properties | War packaging | 
 | spring-boot-sample-multiconnectors* | Spring Boot application with 2 connectors (Http11NioProtocol, TLS) | MultiConnectors (TLS, NIO) |
 | spring-boot-sample-webservices | Spring Boot Webservice application | Webservice | 
-| spring-boot-sample-web-secure | Spring Boot Web application secured using login page & Cross-Site Request Forgery  | Security, Authentication, CSRF | 
+| spring-boot-sample-web-secure | Spring Boot Web application secured using login page & Cross-Site Request Forgery  | Security, Authentication, CSRF |
+| spring-boot-sample-web-method-security | Secure Spring Boot application using login page with CSRF, Role defined on method level. | Security, Auth, Role, CSRF | 
 
 *: It can't be tested as the sample project uses a random port to start the Web NIO Connector. Then, the project must be tested manually
 
