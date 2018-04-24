@@ -6,10 +6,10 @@
 #
 
 function generateStatusResult() {
-  if [[ $1 = *$2* ]]; then
-    STEP2_RESULT="Endpoint query result : Success : Endpoint $3 replied : $1\n"
+  if [[ $RESULT = *$RESPONSE* ]]; then
+    STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $RESULT\n"
   else
-    STEP2_RESULT="Endpoint query result : Failing : Endpoint $3 replied : $1 but we were expecting : $2\n"
+    STEP2_RESULT="Endpoint query result : Failing : Endpoint $ENDPOINT replied : $RESULT but we were expecting : $RESPONSE\n"
   fi
 }
 
@@ -80,8 +80,8 @@ do
      echo "# THIS IS A WEBSOCKET Project"
 
      # Call the Websocket and Capture the response
-     WS_RESPONSE=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
-     generateStatusResult $WS_RESPONSE $RESPONSE $ENDPOINT
+     RESULT=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
+     generateStatusResult $RESULT $RESPONSE $ENDPOINT
      # if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
      #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
      # else
@@ -92,8 +92,8 @@ do
      echo "# THIS IS A Secure Project"
 
      # Call the auth_csrf.py script and Capture the response
-     AUTH_RESPONSE=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT user user)
-     generateStatusResult $AUTH_RESPONSE $RESPONSE $ENDPOINT
+     RESULT=$(python $CURRENT/scripts/auth_csrf.py $ENDPOINT user user)
+     generateStatusResult $RESULT $RESPONSE $ENDPOINT
      # if [[ $AUTH_RESPONSE = *$RESPONSE* ]]; then
      #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $AUTH_RESPONSE\n"
      # else
@@ -104,8 +104,8 @@ do
      echo "# THIS IS A Webservice Project"
 
      # Call the call_websocket.py and Capture the response
-     WS_RESPONSE=$(python $CURRENT/scripts/call_WS.py $ENDPOINT $CURRENT/files/soap.xml)
-     generateStatusResult $WS_RESPONSE $RESPONSE $ENDPOINT
+     RESULT=$(python $CURRENT/scripts/call_WS.py $ENDPOINT $CURRENT/files/soap.xml)
+     generateStatusResult $RESULT $RESPONSE $ENDPOINT
      #if [[ $WS_RESPONSE = *$RESPONSE* ]]; then
      #  STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $WS_RESPONSE\n"
      #else
@@ -129,8 +129,8 @@ do
         echo "Wait till we get http response $STATUS .... from $ENDPOINT" >> $REPORT_FILE
         sleep 30
      done
-     CURL_RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)
-     generateStatusResult $CURL_RESULT $RESPONSE $ENDPOINT
+     RESULT=$(curl $CURL_PARAMS -s $ENDPOINT)
+     generateStatusResult $RESULT $RESPONSE $ENDPOINT
      # if [[ $CURL_RESULT = *$RESPONSE* ]]; then
      #   STEP2_RESULT="Endpoint query result : Success : Endpoint $ENDPOINT replied : $CURL_RESULT\n"
      # else
@@ -143,7 +143,7 @@ do
   echo -e "======== STEP 2 : Spring Boot Stopped ===================\n"  >> $REPORT_FILE
 
   echo -e "======= !!!! Report Result !!!! ========================\n"  >> $REPORT_FILE
-  echo -e "Project : PROJECT_TITLE\n" >> $REPORT_FILE
+  echo -e "Project : $PROJECT_TITLE\n" >> $REPORT_FILE
   echo -e "Step 1: $STEP1_RESULT" >> $REPORT_FILE
   echo -e "Step 2: $STEP2_RESULT" >> $REPORT_FILE
 

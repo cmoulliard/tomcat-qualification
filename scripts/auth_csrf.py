@@ -24,5 +24,5 @@ headers = {'X-CSRF-TOKEN': csrf_value, 'Referer': url}
 r = session.post(url, data=payload, headers=headers)
 
 # print("Response status : %s" % r.status_code)
-print("Response content : %s" % r.text)
+print(r.text)
 

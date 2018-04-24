@@ -11,7 +11,7 @@
     "endpoint": "http://localhost:8989/services",
     "port": "8989",
     "status": "202",
-    "response": ""
+    "response": "202"
   },
   { "name": "spring-boot-sample-war",
     "title":"Spring Boot war packaging and custom properties",
