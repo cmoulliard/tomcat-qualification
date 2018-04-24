@@ -23,7 +23,7 @@
 		<tomcat-juli.version>8.0.36</tomcat-juli.version>
 		<!--
 		<tomcat.version>8.0.36.redhat-30</tomcat.version>
-		<tomcat-juli>8.5.20.redhat-5</tomcat-juli>
+		<tomcat-juli.version>8.5.20.redhat-5</tomcat-juli.version>
 		-->
 	</properties>
 	<modules>
@@ -145,6 +145,12 @@
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-websocket</artifactId>
+			<version>${tomcat.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat</artifactId>
+			<type>pom</type>
 			<version>${tomcat.version}</version>
 		</dependency>
 		<dependency>
