@@ -94,7 +94,7 @@ do
        RESULT=$(python $CURRENT/scripts/call_websocket.py $ENDPOINT)
        generateStatusResult $RESULT $RESPONSE $ENDPOINT
        ;;
-    *"secure"*)
+    *"secur"*)
        echo "# THIS IS A SECURED PROJECT"
        # Call the auth_csrf.py script and Capture the response
        echo "python $CURRENT/scripts/call_auth_csrf.py $ENDPOINT $USERNAME $PASSWORD"
